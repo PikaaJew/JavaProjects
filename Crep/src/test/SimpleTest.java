@@ -10,6 +10,5 @@ public class SimpleTest {
     public void simpleTest() throws IOException {
         Main.findWord(false, false, false, "Hollywood", "input.txt");
     }
-
 }
 
