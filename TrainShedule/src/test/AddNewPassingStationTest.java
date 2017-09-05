@@ -15,11 +15,7 @@ public class AddNewPassingStationTest {
         Map<String, Timestamp> shedule = new HashMap<>();
         Station station = new Station(trains, shedule);
         station.AddTrain("IRE1", new Timestamp(System.currentTimeMillis()), "Priozersk");
-        System.out.println(station.toString());
         station.AddPassStation("IRE1", "Lushasno");
-        System.out.println(station.toString());
         station.AddPassStation("IRE1", "Vitebsk");
-        System.out.println(station.toString());
     }
-
 }

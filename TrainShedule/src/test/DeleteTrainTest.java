@@ -15,10 +15,7 @@ public class DeleteTrainTest {
         Map<String, Timestamp> shedule = new HashMap<>();
         Station station = new Station(trains, shedule);
         station.AddTrain("IRE1", new Timestamp(System.currentTimeMillis()), "Priozersk");
-        System.out.println(station.toString());
         station.DeleteTrain("ICE");
-        System.out.println(station.toString());
         station.DeleteTrain("IRE1");
-        System.out.println(station.toString());
     }
 }
