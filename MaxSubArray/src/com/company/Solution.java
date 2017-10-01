@@ -1,39 +1,41 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Solution {
-    private ArrayList<Integer> diffArray = new ArrayList<>();
+    private List<Integer> diffArray = new ArrayList<>();
 
-    public Solution(ArrayList<Integer> array) {
-        if (array.size() <= 1) {
-            diffArray.add(0);
-        } else {
-            for (int i = 1; i < array.size(); i++) {
-                diffArray.add(array.get(i) - array.get(i - 1));
-            }
+    public Solution(List<Integer> array) {
+        for (int i = 1; i < array.size(); i++) {
+            diffArray.add(array.get(i) - array.get(i - 1));
         }
     }
+    public Result findSolution(){
+        Result result = findMaxSubArray(0, diffArray.size() - 1);
+        result.setRight(result.getRight() + 1);
+        return result;
+    }
 
-    public int[] findMaxSubArray (int left, int right){
+
+    private Result findMaxSubArray (int left, int right){
         if (left == right) {
-            return new int[]{left, right, diffArray.get(left)};
+            return new Result(left, right, diffArray.get(left));
         } else if (left < right) {
             int mid = (right + left) / 2;
-            int[] answerLeft = findMaxSubArray(left, mid);
-            int[] answerRight = findMaxSubArray(mid + 1, right);
-            int[] answerCross = findMaxCrossSubArray(left, mid, right);
-            if (answerLeft[2] >= answerCross[2] && answerLeft[2] >= answerRight[2]) {
+            Result answerLeft = findMaxSubArray(left, mid);
+            Result answerRight = findMaxSubArray(mid + 1, right);
+            Result answerCross = findMaxCrossSubArray(left, mid, right);
+            if (answerLeft.getSum() >= answerCross.getSum() && answerLeft.getSum() >= answerRight.getSum()) {
                 return answerLeft;
-            } else if (answerCross[2] >= answerLeft[2] && answerCross[2] >= answerRight[2]) {
+            } else if (answerCross.getSum() >= answerLeft.getSum() && answerCross.getSum() >= answerRight.getSum()) {
                 return answerCross;
             } else {
                 return answerRight;
             }
-        } else return null;
-
+        } else throw new IllegalArgumentException();
     }
-    public int[] findMaxCrossSubArray (int left, int mid, int right){
+    private Result findMaxCrossSubArray (int left, int mid, int right){
         int sumLeft = Integer.MIN_VALUE;
         int sumRight = Integer.MIN_VALUE;
         int indexLeft = mid;
@@ -54,6 +56,6 @@ public class Solution {
                 indexRight = i;
             }
         }
-        return new int[]{indexLeft, indexRight, sumLeft + sumRight};
+        return new Result(indexLeft, indexRight, sumLeft + sumRight);
     }
 }

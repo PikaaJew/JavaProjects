@@ -1,18 +1,19 @@
-package com.company;
+package test;
+
+import com.company.Result;
+import com.company.Solution;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main {
-
-    public static void main(String[] args) {
+public class SimpleAnswerArrayTest {
+    @Test
+    public void simpleAnswerArrayTest() {
         List<Integer> arrayList = new ArrayList<>();
-        /*arrayList.add(3);
-        arrayList.add(13);
-        arrayList.add(7);
-        arrayList.add(19);
-        arrayList.add(8);*/
-        arrayList.add(18);
+        arrayList.add(1);
+        arrayList.add(3);
+        arrayList.add(30);
         Solution solution = new Solution(arrayList);
         Result answer = solution.findSolution();
         System.out.println("buy day: " + answer.getLeft() + "\nsell day: " + answer.getRight() + "\nsum: " + answer.getSum());
