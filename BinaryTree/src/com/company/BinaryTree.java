@@ -78,6 +78,25 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
         }
         return min(tree.left);
     }
+
+    public int getHeight() {
+        return getHeight(root);
+    }
+
+    private int getHeight(Node<T> node) {
+        int heightLeft = 0;
+        int heightRight = 0;
+        if (node == null)
+            return 0;
+        if (node.left != null) {
+            heightLeft = getHeight(node.left);
+        }
+        if (node.right != null) {
+            heightRight = getHeight(node.right);
+        }
+        return (Math.max(heightLeft, heightRight) + 1);
+    }
+
     private Node<T> remove(Node<T> start, T value) {
         if (start == null)
             return null;
@@ -89,8 +108,8 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
             start.right = remove(start.right, value);
         } else if (start.left != null && start.right != null) {
             Node<T> node = start;
-            start = min(node.right);
-            remove(node.right, start.value);
+            start = min(start.right);
+            remove(node, start.value);
             start.left = node.left;
             start.right = node.right;
         } else {
